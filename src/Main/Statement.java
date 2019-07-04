@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Statement {
 
@@ -21,16 +22,18 @@ public class Statement {
     }
 
     public StringBuilder displayStatement() {
-        statement.append("date || credit || debit || balance");
+        statement.append("date || credit || debit || balance\n");
+        Collections.reverse(transactions);
         for (Transactions transaction : transactions) {
             statement.append(transaction.getTransactionDate());
-            if (transaction.getTransactionType() == "Deposit") {
-                statement.append(" || " + transaction.getTransactionAmount() + " ||");
+            if (transaction.getTransactionType() == "deposit") {
+                statement.append(" || " + String.format("%.2f", transaction.getTransactionAmount()) + " ||");
             } else if (transaction.getTransactionType() == "withdrawal"){
-                statement.append(" || || " + transaction.getTransactionAmount());
+                statement.append(" || || " + String.format("%.2f", transaction.getTransactionAmount()));
             }
-            statement.append(" || " + transaction.getCurrentBalance() + "\n");
+            statement.append(" || " + String.format("%.2f", transaction.getCurrentBalance()) + "\n");
         }
+        System.out.println(statement);
         return statement;
     }
 }
