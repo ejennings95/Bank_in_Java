@@ -44,4 +44,12 @@ public class AccountTest {
         assertEquals(50.00, account.getBalance(), 0.0);
     }
 
+    @DisplayName("should add to transactions list when money is deposited or withdrawn")
+    @Test
+    void depositAndWithdrawSaveToTransactions() throws InsufficientFundsInAccountException {
+        Account account = new Account();
+        account.deposit(100.00);
+        account.withdraw(50.00);
+        assertEquals(2, account.getTransactions().size());
+    }
 }
