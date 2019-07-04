@@ -16,4 +16,9 @@ public class Account {
     public void deposit(double amount){
         setBalance(balance + amount);
     }
+
+    public void withdraw(double amount) throws InsufficientFundsInAccountException {
+        if (balance - amount <0) throw new InsufficientFundsInAccountException("There is insufficient funds in this account");
+        setBalance(balance - amount);
+    }
 }
